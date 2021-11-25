@@ -3,4 +3,33 @@
   --ff-heading: 'Heebo', sans-serif;
   --ff-content: 'Tajawal', sans-serif;
   --ff-icons: 'Material Icons', sans-serif; 
+
+  --color-main: hsl(21, 91%, 58%);
+  --color-secondary: hsl(227, 63%, 44%);
+
+  --text-900: 45px;
+  --text-800: 35px;
+  --text-200: 22px;
+  --text-100: 18px;
+
+  --space-100: 4px;
+  --space-200: 8px;
+  --space-300: 12px;
+  --space-400: 16px;
+  --space-500: 24px;
+  --space-600: 32px;
+  --space-700: 48px;
+  --space-800: 64px;
+  --space-900: 96px;
+}
+
+@media (min-width: 600px) {
+
+  :root {
+    --text-900: 60px;
+    --text-800: 42px;
+    --text-200: 25px;
+    --text-100: 20px;
+  }
+  
 }

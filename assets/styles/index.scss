@@ -5,77 +5,48 @@
 @import './reset';
 
 // Base styles
+
 body {
   font-family: var(--ff-content);
-  font-size: 16px;
-  line-height: 1.5em;
-  letter-spacing: .15em;
+  font-size: var(--text-100);
+  letter-spacing: .05em;
 }
 
-h1, h2, h3 {
+h2 {
   font-family: var(--ff-heading);
+  font-size: var(--text-900);
   line-height: 1em;
+  letter-spacing: .05em;
+}
+
+h3 {
+  font-family: var(--ff-heading);
+  font-size: var(--text-800);
+  line-height: 1em;
+  letter-spacing: .05em;
+}
+
+b {
+  color: var(--color-main);
 }
 
 p {
-  max-width: 60ch;
+  font-size: var(--text-200);
+  line-height: 1.25em;
+  max-width: 35ch;
 }
+
+// Composition
+@import './composition/stack.scss';
 
 // Utilities
+@import './utils/center.scss';
+@import './utils/hidden.scss';
+@import './utils/flex.scss';
 
-.hidden { 
-  position: absolute; 
-  top: -9999px !important;
-  left: -9999px !important; 
-}
+// Design
+@import './design/icons.scss';
+@import './design/color.scss';
+@import './design/text.scss';
 
-.flex {
-  display: flex;
-  gap: 0.5em;
-}
-
-.flex-align-center {
-  align-items: center;  
-}
-
-.flex-column {
-  flex-direction: column;
-}
-
-.icon::before {
-  font-family: 'Material Icons';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 24px;  /* Preferred icon size */
-  display: inline-block;
-  line-height: 1;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
-  white-space: nowrap;
-  direction: ltr;
-
-  /* Support for all WebKit browsers. */
-  -webkit-font-smoothing: antialiased;
-  /* Support for Safari and Chrome. */
-  text-rendering: optimizeLegibility;
-
-  /* Support for Firefox. */
-  -moz-osx-font-smoothing: grayscale;
-
-  /* Support for IE. */
-  font-feature-settings: 'liga';
-
-}
-
-.icon-place::before {
-  content: 'place';
-}
-
-.icon-schedule::before {
-  content: 'schedule';
-}
-
-.icon-phone::before {
-  content: 'phone';
-}
+// Blocks

@@ -1,7 +1,7 @@
 /* Source: https://piccalil.li/blog/a-modern-css-reset/ */
+/* Source: https://www.joshwcomeau.com/css/custom-css-reset/ */
 /* Source: https://tailwindcss.com/docs/preflight */
 
-/* Box sizing rules */
 *,
 *::before,
 *::after {
@@ -12,112 +12,48 @@
   margin: 0;
 }
 
-/* Remove default margin */
-body,
-dl,
-dd,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-hr,
-p,
-pre,
-figure,
-blockquote {
-  margin: 0;
+html, body, #__nuxt, #__layout {
+  height: 100vh;
+  min-width: fit-content;
 }
 
-pre {
-  font-family: inherit;
-  white-space: pre-wrap;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-size: inherit;
-  font-weight: inherit;
-}
-
-/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
-ul,
-ol {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-/* Set core root defaults */
 html:focus-within {
   scroll-behavior: smooth;
 }
 
-/* Set core body defaults */
 body {
-  min-height: 100vh;
-  text-rendering: optimizeSpeed;
   line-height: 1.5;
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* A elements that don't have a class get default styles */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+ul, li {
+  list-style: none;
+}
+
 a:not([class]) {
   text-decoration-skip-ink: auto;
 }
 
-
-img,
-svg,
-video,
-canvas,
-audio,
-iframe,
-embed,
-object,
-picture {
-  display: block;
-  vertical-align: middle;
+#__nuxt, #__layout {
+  isolation: isolate;
 }
 
-/* Make images easier to work with */
-img,
-picture,
-video {
-  max-width: 100%;
-  // height: auto;
-}
-
-img {
-  object-fit: contain;
-}
-
-/* Inherit fonts for inputs and buttons */
-input,
-button,
-textarea,
-select {
-  font: inherit;
-}
-
-button:focus {
-  outline: 1px dotted;
-  outline: 5px auto -webkit-focus-ring-color;
-}
-
-details summary { 
-  cursor: pointer;
-}
-
-details summary > * {
-  display: inline;
-}
-
-/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
   html:focus-within {
    scroll-behavior: auto;
@@ -131,8 +67,4 @@ details summary > * {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-}
-
-html, body, #__nuxt, #__layout {
-  height: 100%;
 }
