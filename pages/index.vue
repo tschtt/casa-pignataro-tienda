@@ -27,10 +27,10 @@
         </div>
         <div class="[ icon icon-schedule ][ flex flex-center ]">
           <dt class="hidden">Horario</dt>
-          <div>
-            <dd>Lunes a Viernes de 08:30 a 13:33 - 15:00 a 18:00</dd>
-            <dd>Sabados de 08:30 a 13:00</dd>
-          </div>
+            <dd>
+              Lunes a Viernes de 08:30 a 13:00 - 15:00 a 18:00 <br/> 
+              Sabados de 08:30 a 13:00
+            </dd>
         </div>
         <div class="[ icon icon-phone ][ flex flex-center ]">
           <dt class="hidden">Teléfono</dt>
