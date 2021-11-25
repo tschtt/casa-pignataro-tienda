@@ -2,7 +2,7 @@
   <div class="main-container background-image stack">
     <header>
       <h1>
-        <img class="logo" src="/logo-transparent.svg" alt="Casa Pignataro" width="300">
+        <img class="logo" src="/logo-transparent.svg" alt="Casa Pignataro" width="300" height="100">
       </h1>
     </header>
     <main class="stack">
@@ -91,6 +91,7 @@
   
   .main-container .logo {
     width: 350px;
+    height: auto;
   }
 }
 
