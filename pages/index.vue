@@ -56,6 +56,11 @@
 
   > footer {
     align-self: center;
+    border-top: 10px solid;
+    border-image-slice: 1;
+    border-width: 3px;;
+    border-image-source: linear-gradient(to right, transparent, var(--color-secondary) 10% 90%, transparent);
+    padding-top: var(--space-400);
   }
 
   .border-left-blue {
@@ -81,12 +86,7 @@
 
   .main-container > footer {
     align-self: initial;
-    
-    border-top: 10px solid;
-    border-image-slice: 1;
-    border-width: 3px;;
     border-image-source: linear-gradient(to right, transparent, var(--color-secondary) 5%, transparent 80%);
-    padding-top: var(--space-400);
   }
   
   .main-container .logo {
