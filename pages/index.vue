@@ -12,7 +12,7 @@
       <p>
         Desde Casa Pignataro estamos trabajando
         para que tengas la mejor experiencia. 
-        Proximamente encontrarás nuestro catálogo
+        Próximamente encontrarás nuestro catálogo
         virtual
       </p>
     </main>
