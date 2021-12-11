@@ -37,6 +37,12 @@ p {
   max-width: 35ch;
 }
 
+pre {
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
 // Composition
 @import './composition/stack.scss';
 
