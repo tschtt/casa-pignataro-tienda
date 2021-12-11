@@ -20,7 +20,7 @@
       <h3 class="color-main">
         Contacto
       </h3>
-      <dl>
+      <dl class="field-container">
         <div 
           v-for="item in items" :key="item.order"
           class="[ flex flex-center ]"
@@ -53,7 +53,7 @@ export default {
     const items = ref([])
 
     const loadItems = async () => {
-      items.value = await $contact.findMany()
+      items.value = await $contact.findMany({ active: 1 })
     }
 
     onMounted(() => {
