@@ -36,11 +36,17 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
+    // https://composition-api.nuxtjs.org/,
+    '@nuxtjs/composition-api/module',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
   ],
+
+  env: {
+    BACKEND_URL: process.env.BACKEND_URL,
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

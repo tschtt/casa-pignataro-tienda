@@ -20,28 +20,54 @@
       <h3 class="color-main">
         Contacto
       </h3>
-      <dl class="text-100">
-        <div class="[ icon icon-place ][ flex flex-center ]">
-          <dt class="hidden">Ubicación</dt>
-          <dd>Avenida Gral. San Martín 3704. Lomas del Mirador</dd>
-        </div>
-        <div class="[ icon icon-schedule ][ flex flex-center ]">
-          <dt class="hidden">Horario</dt>
-            <dd>
-              Lunes a Viernes de 08:30 a 13:00 - 15:00 a 18:00 <br/> 
-              Sabados de 08:30 a 13:00
-            </dd>
-        </div>
-        <div class="[ icon icon-phone ][ flex flex-center ]">
-          <dt class="hidden">Teléfono</dt>
-          <dd>4454-5871</dd>
+      <dl>
+        <div 
+          v-for="item in items" :key="item.order"
+          class="[ flex flex-center ]"
+        >
+          <dt>
+            <div class="material-icons [ flex flex-center ]" aria-hidden>
+              {{ item.icon }}
+            </div>
+            <div class="hidden">
+              {{ item.name }}
+            </div>
+          </dt>
+          <dd>
+            <pre>{{ item.value }}</pre>
+          </dd>
         </div>
       </dl>
     </footer>
   </div>
 </template>
 
-<style lang="scss">
+<script>
+import { onMounted, ref } from '@nuxtjs/composition-api'
+import { useResource } from "~/composables"
+
+export default {
+  setup() {
+    const $contact = useResource('/contact')
+
+    const items = ref([])
+
+    const loadItems = async () => {
+      items.value = await $contact.findMany()
+    }
+
+    onMounted(() => {
+      loadItems()
+    })
+
+    return {
+      items,
+    }    
+  },
+}
+</script>
+
+<style lang="scss" scoped>
 
 .main-container {
   display: grid;
