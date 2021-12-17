@@ -1,5 +1,10 @@
 export default {
-  // Global page headers: https://go.nuxtjs.dev/config-head
+
+  server: {
+    port: 3001,
+  },
+  
+  // Global page headers: https://go.nuxtjs.dev/config-head  
   head: {
     title: 'Casa Pignataro | Electrodomesticos',
     htmlAttrs: {
