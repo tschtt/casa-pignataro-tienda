@@ -8,33 +8,8 @@
 
 body {
   font-family: var(--ff-content);
-  font-size: var(--text-100);
-  letter-spacing: .05em;
-  background-color: black;
-}
-
-h2 {
-  font-family: var(--ff-heading);
-  font-size: var(--text-900);
-  line-height: 1em;
-  letter-spacing: .05em;
-}
-
-h3 {
-  font-family: var(--ff-heading);
-  font-size: var(--text-800);
-  line-height: 1em;
-  letter-spacing: .05em;
-}
-
-b {
-  color: var(--color-main);
-}
-
-p {
   font-size: var(--text-200);
-  line-height: 1.25em;
-  max-width: 35ch;
+  letter-spacing: .05em;
 }
 
 pre {
