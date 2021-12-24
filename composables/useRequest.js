@@ -5,7 +5,7 @@ const state = reactive({
   refreshCallback: null,
 })
 
-export default function useFetch() {
+export default function useRequest() {
   const { env } = useContext()
   
   const base = env.BACKEND_URL

@@ -1,59 +1,47 @@
 <template>
   <header class="layout-header">
-    <div class="header-container">
-      <h1 class="layout-title">
-        <nuxt-link to="/">
-          <picture>
-            <source 
-              media="(min-width: 700px)" 
-              srcset="logo-transparent.png"
-            >
-            <img
-              src="logo-small-transparent.png"
-              alt="Casa Pignataro Electrodomésticos"
-              width="45"
-              height="45"
-            >
-          </picture>
-        </nuxt-link>
-      </h1>
-      <form class="search-form" role="search">
-        <input type="text" placeholder="¡Buscá tu producto!">
-        <button class="material-icons">
-          search
-        </button>
-      </form>
-      <nav class="header-nav">
-        <nuxt-link to="/contacto" class="nav-link icon-after" icon="place">
-          <span class="hide-visually">
-            Contacto
-          </span>
-        </nuxt-link>
-      </nav>
-    </div>
+    <h1 class="layout-title">
+      <nuxt-link to="/">
+        <picture>
+          <source 
+            media="(min-width: 700px)" 
+            srcset="logo-transparent.png"
+          >
+          <img
+            src="logo-small-transparent.png"
+            alt="Casa Pignataro Electrodomésticos"
+            width="45"
+            height="45"
+          >
+        </picture>
+      </nuxt-link>
+    </h1>
+    <form class="search-form" role="search">
+      <input type="text" placeholder="¡Buscá tu producto!">
+      <button class="material-icons">
+        search
+      </button>
+    </form>
+    <nav class="header-nav">
+      <nuxt-link to="/contacto" class="nav-link icon-after" icon="place">
+        <span class="hide-visually">
+          Contacto
+        </span>
+      </nuxt-link>
+    </nav>
   </header>
 </template>
 
 <style lang="scss" scoped>
 
 .layout-header {
-  // Spacing
-  padding: var(--space-400);
-  // Colors
-  background-image: linear-gradient(#f23b3b, #d71111);
-  box-shadow: var(--shadow-200);
-}
-
-.header-container {
   // Layout
   display: grid;
   grid-template-columns: minmax(min-content, 1fr) minmax(auto, 60ch) minmax(auto, 1fr);
   align-items: center;
   gap: var(--space-300);
+  padding: var(--space-400);
 
-  // Spacing
-  max-width: 1200px;
-  margin: auto;
   
   > h1 {
     min-width: 45px;
@@ -127,14 +115,12 @@
 @media (min-width: 700px) {
 
   .layout-header {
-    padding-block: var(--space-300);
-    padding-inline: var(--space-400);
-  }
-
-  .header-container {
     display: grid;
     grid-template-columns: 1fr minmax(40ch, auto);
     grid-template-rows: auto auto;
+    
+    padding-block: var(--space-300);
+    padding-inline: var(--space-400);
 
     > h1 {
       grid-column: 1 / 2;

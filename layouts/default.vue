@@ -1,8 +1,12 @@
 <template>
   <div id="app">
-    <LayoutHeader />
-    <LayoutNav />
-    <div class="layout-main-container">
+    <div class="app-header-container">
+      <LayoutHeader />
+    </div>
+    <div class="app-nav-container">
+      <LayoutNav />
+    </div>
+    <div class="app-main-container">
       <Nuxt />
     </div>
   </div>
@@ -25,11 +29,25 @@ export default {
   display: grid;
   grid-template-rows: auto auto 1fr auto;
   min-height: 100%;
+  .app-header-container {
+    background-image: linear-gradient(#f23b3b, #d71111);
+    box-shadow: var(--shadow-200);
+  }
+
+  .app-nav-container {
+    background-color: var(--color-gray-300);
+    border-bottom: 2px solid var(--color-gray-400);
+  }
+
+  .app-main-container {
+    background-color: var(--color-gray-300);
+  }
 }
 
-.layout-main-container {
 
-  > main {
+.app-header-container, .app-nav-container, .app-main-container {
+
+  > * {
     max-width: 1200px;
     margin: auto;
   }
