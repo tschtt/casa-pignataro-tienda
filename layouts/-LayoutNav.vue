@@ -1,3 +1,3 @@
 <template>
-  <nav></nav>
+  <nav class="layout-nav"></nav>
 </template>
