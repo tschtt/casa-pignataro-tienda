@@ -32,15 +32,20 @@ export default {
   .app-header-container {
     background-image: linear-gradient(#f23b3b, #d71111);
     box-shadow: var(--shadow-200);
+    z-index: 3;
   }
 
   .app-nav-container {
     background-color: var(--color-gray-300);
     border-bottom: 2px solid var(--color-gray-400);
+    padding-inline: var(--space-500);
+    z-index: 2;
   }
 
   .app-main-container {
     background-color: var(--color-gray-300);
+    padding: var(--space-500);
+    z-index: 1;
   }
 }
 
