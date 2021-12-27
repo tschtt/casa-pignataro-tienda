@@ -4,26 +4,31 @@
       {{ name }}
     </h3>
     <div class="grid">
-      <article
+      <nuxt-link 
         v-for="article in articles"
         :key="article.id"
-        class="article card"
+        to="/"
       >
-        <div class="image">
-          <img 
-            :src="article.images[0]"
-            height="200"
-            width="200"
-          >
-        </div>
-        <h4 class="name">{{ article.name }}</h4>
-        <p class="description">
-          {{ article.description }}
-        </p>
-        <p class="value">
-          $ {{ article.value.toFixed(2) }}
-        </p>
-      </article>
+      
+        <article
+          class="article card"
+        >
+          <div class="image">
+            <img 
+              :src="article.images[0]"
+              height="200"
+              width="200"
+            >
+          </div>
+          <h4 class="name">{{ article.name }}</h4>
+          <p class="description">
+            {{ article.shortDescription }}
+          </p>
+          <p class="value">
+            $ {{ article.value.toFixed(2) }}
+          </p>
+        </article>
+      </nuxt-link>
     </div>
   </section>
 </template>
@@ -61,6 +66,11 @@ export default {
 
 <style lang="scss" scoped>
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .article-categorie > * + * {
   margin-top: var(--space-400);
 }
@@ -70,6 +80,10 @@ export default {
   display: grid;
   grid-template-columns: repeat(var(--grid-columns), 1fr);
   gap: var(--space-500);
+
+  > * {
+    display: block;
+  }
 }
 
 @media (min-width: 500px) {
@@ -78,7 +92,7 @@ export default {
   }
 }
 
-@media (min-width: 900px) {
+@media (min-width: 800px) {
   .grid {
     --grid-columns: 4;
   }

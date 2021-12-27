@@ -23,7 +23,7 @@
       </button>
     </form>
     <nav class="header-nav">
-      <nuxt-link to="/contacto" class="nav-link icon-after" icon="place">
+      <nuxt-link to="/" class="nav-link icon-after" icon="place">
         <span class="hide-visually">
           Contacto
         </span>
