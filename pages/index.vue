@@ -28,7 +28,7 @@ export default {
     const categories = ref([])
 
     useFetch(async () => {
-      categories.value = await $categories.findMany({ limit: 4 })
+      categories.value = await $categories.findMany()
     })
 
     return {

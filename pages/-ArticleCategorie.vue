@@ -54,7 +54,7 @@ export default {
     const articles = ref([])
 
     useFetch(async () => {
-      articles.value = await $articles.findMany({ fkCategorie: props.id })
+      articles.value = await $articles.findMany({ fkCategorie: props.id, limit: 4 })
     })
     
     return {
