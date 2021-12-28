@@ -39,6 +39,10 @@
   content: 'phone';
 }
 
+.icon-before[icon=menu]::before {
+  content: 'menu';
+}
+
 /* ----- Icon After ----- */
 
 .icon-after::after {
@@ -77,4 +81,8 @@
 
 .icon-after[icon=phone]::after {
   content: 'phone';
+}
+
+.icon-after[icon=menu]::after {
+  content: 'menu';
 }

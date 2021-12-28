@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <div class="app-header-container">
-      <LayoutHeader />
+      <LayoutHeader :show-nav.sync="showNav" />
     </div>
     <div class="app-nav-container">
-      <LayoutNav />
+      <LayoutNav :show-nav.sync="showNav" />
     </div>
     <div class="app-main-container">
       <Nuxt />
@@ -13,12 +13,19 @@
 </template>
 
 <script>
+import { ref } from "@nuxtjs/composition-api"
 import LayoutHeader from "./-LayoutHeader.vue"
 import LayoutNav from "./-LayoutNav.vue"
 export default {
   components: {
     LayoutHeader,
     LayoutNav,
+  },
+  setup() {
+    const showNav = ref(false)
+    return {
+      showNav
+    }
   }
 }
 </script>
@@ -33,7 +40,8 @@ export default {
     background-image: linear-gradient(#f23b3b, #d71111);
     box-shadow: var(--shadow-200);
     z-index: 3;
-  }
+
+}
 
   .app-nav-container {
     background-color: var(--color-gray-300);

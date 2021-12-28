@@ -28,9 +28,35 @@
           Contacto
         </span>
       </nuxt-link>
+      <button class="nav-link-menu nav-link icon-after" icon="menu" @click="toggleNav">
+        <span class="hide-visually">
+          Categorias
+        </span>
+      </button>
     </nav>
   </header>
 </template>
+
+<script>
+export default {
+  props: {
+    showNav: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  setup(props, { emit }) {
+
+    const toggleNav = () => {
+      emit('update:show-nav', !props.showNav)
+    }
+
+    return {
+      toggleNav
+    }    
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 
@@ -96,7 +122,9 @@
   display: flex;
   justify-content: flex-end;
 
-  > a {
+  > .nav-link {
+    background-color: transparent;
+    border: none;
     padding: var(--space-100);
     color: var(--color-gray-100);
     text-decoration: none;
@@ -134,6 +162,14 @@
     }
     
   }
+
+  .header-nav {
+    > .nav-link-menu {
+      display: none;
+    }
+
+  }
+
 
   .layout-title img {
     width: auto;

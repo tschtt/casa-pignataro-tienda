@@ -1,5 +1,5 @@
 <template>
-  <nav class="layout-nav">
+  <nav class="layout-nav"  :hidden="!showNav">
     <nuxt-link class="link" to="/" v-for="categorie in categories" :key="categorie.id">
       {{ categorie.name }}
     </nuxt-link>
@@ -11,6 +11,12 @@ import { ref, useFetch } from '@nuxtjs/composition-api'
 import { useResource } from '~/composables/index.js'
 
 export default {
+  props: {
+    showNav: {
+      type: Boolean,
+      default: false,
+    },
+  },
   setup() {
     const $categories = useResource('/categories')
 
@@ -33,6 +39,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
 }
+
 
 .link {
   display: inline-block;
@@ -65,5 +72,20 @@ export default {
   
 }
 
+@media (max-width: 700px) {
+
+  .layout-nav {
+    flex-direction: column;
+  }
+
+  .link {
+    display: block;
+  }
+  
+  .layout-nav[hidden] {
+    display: none;
+  }
+
+}
 
 </style>
