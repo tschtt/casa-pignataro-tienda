@@ -97,12 +97,11 @@ export default {
   > input {
     font-size: var(--text-300);
     padding: var(--space-100);
+    padding-left: var(--space-400);
     flex-grow: 1;
-    order: 1;
   }
 
   > button {
-    order: 0;
     
     padding-inline: var(--space-200);
     border-radius: var(--border-100);
@@ -147,7 +146,7 @@ export default {
     grid-template-columns: 1fr minmax(40ch, auto);
     grid-template-rows: auto auto;
     
-    padding-block: var(--space-300);
+    padding-block: var(--space-400);
     padding-inline: var(--space-400);
 
     > h1 {
@@ -173,7 +172,7 @@ export default {
 
   .layout-title img {
     width: auto;
-    height: 100px;
+    height: 85px;
   }
 
   .search-form {
