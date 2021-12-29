@@ -24,6 +24,11 @@ export default {
 
     useFetch(async () => {
       categories.value = await $categories.findMany()
+      categories.value = categories.value.sort((a, b) => {
+        if(a.order < b.order) { return -1 }
+        if(a.order > b.order) { return 1 }
+        return 0
+      })
     })
 
     return {
