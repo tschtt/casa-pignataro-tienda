@@ -5,10 +5,10 @@
         <picture>
           <source 
             media="(min-width: 700px)" 
-            srcset="logo-transparent.png"
+            srcset="/logo-transparent.png"
           >
           <img
-            src="logo-small-transparent.png"
+            src="/logo-small-transparent.png"
             alt="Casa Pignataro Electrodomésticos"
             width="45"
             height="45"
@@ -16,8 +16,8 @@
         </picture>
       </nuxt-link>
     </h1>
-    <form class="search-form" role="search">
-      <input type="text" placeholder="¡Buscá tu producto!">
+    <form class="search-form" role="search" @submit.prevent="submit">
+      <input v-model="search" type="text" placeholder="¡Buscá tu producto!">
       <button class="material-icons">
         search
       </button>
@@ -38,6 +38,8 @@
 </template>
 
 <script>
+import { ref, useRouter } from "@nuxtjs/composition-api"
+
 export default {
   props: {
     showNav: {
@@ -47,11 +49,20 @@ export default {
   },
   setup(props, { emit }) {
 
+    const $router = useRouter()
+    const search = ref('')
+
     const toggleNav = () => {
       emit('update:show-nav', !props.showNav)
     }
 
+    const submit = () => {
+      $router.push(`/articulos?buscar=${search.value}`)
+    }
+
     return {
+      search,
+      submit,
       toggleNav
     }    
   }
@@ -102,17 +113,13 @@ export default {
   }
 
   > button {
-    
     padding-inline: var(--space-200);
-    border-radius: var(--border-100);
-
+    border-left: 2px solid transparent;
+    transition: border-left 200ms ease;
     cursor: pointer;
-    
-    
-    transition: background-color 200ms ease;
 
     &:hover {
-      background-color: var(--color-gray-300);
+      border-left: 2px solid var(--color-accent);
     }
   }
 }

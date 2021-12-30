@@ -4,6 +4,10 @@
   gap: var(--space-200);
 }
 
-.flex-center {
+.justify-end {
+  justify-content: end;
+}
+
+.align-center {
   align-items: center;
 }

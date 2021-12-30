@@ -18,6 +18,7 @@ pre {
   word-wrap: break-word;
 }
 
+
 // Composition
 @import './composition/stack.scss';
 
@@ -32,3 +33,8 @@ pre {
 @import './design/text.scss';
 
 // Blocks
+@import './blocks/link.scss';
+@import './blocks/card.scss';
+
+// Transitions
+@import './transitions/index.scss';

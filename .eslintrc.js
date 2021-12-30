@@ -19,5 +19,6 @@ module.exports = {
   rules: {
     'vue/attributes-order': 'off',
     'prefer-const': 'off',
+    'vue/order-in-components': 'off',
   }
 }

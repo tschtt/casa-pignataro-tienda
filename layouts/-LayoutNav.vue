@@ -1,6 +1,10 @@
 <template>
   <nav class="layout-nav"  :hidden="!showNav">
-    <nuxt-link class="link" to="/" v-for="categorie in categories" :key="categorie.id">
+    <nuxt-link 
+      v-for="categorie in categories" :key="categorie.id"
+      :to="`/articulos?fkCategorie=${categorie.id}`" 
+      class="link" 
+    >
       {{ categorie.name }}
     </nuxt-link>
   </nav>
