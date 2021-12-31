@@ -7,7 +7,12 @@
 .title {
   font-family: var(--ff-heading);
   font-size: var(--text-900);
-  color: var(--color-main);
   font-weight: 700;
   letter-spacing: .02em;
+}
+
+.subtitle {
+  font-family: var(--ff-heading);
+  font-size: var(--text-700);
+  font-weight: 400;
 }

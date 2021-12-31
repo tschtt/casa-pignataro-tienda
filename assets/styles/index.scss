@@ -6,6 +6,10 @@
 
 // Base styles
 
+button {
+  border: none;
+}
+
 body {
   font-family: var(--ff-content);
   font-size: var(--text-200);
@@ -16,6 +20,7 @@ pre {
   overflow-x: auto;
   white-space: pre-wrap;
   word-wrap: break-word;
+  max-width: 60ch;
 }
 
 

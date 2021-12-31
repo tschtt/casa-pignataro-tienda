@@ -7,7 +7,7 @@
       v-for="categorie in categories" :key="categorie.order"
       class="categorie"
     >
-      <h3 class="title">
+      <h3 class="title color-main">
         {{ categorie.name }}
       </h3>
       <ArticleGrid 

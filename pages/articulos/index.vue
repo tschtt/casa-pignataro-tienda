@@ -1,6 +1,6 @@
 <template>
   <main class="[ page-articulos ][ stack ]">
-    <h2 class="title">
+    <h2 class="title color-main">
       Resultados
     </h2>
     <ArticleGrid 
