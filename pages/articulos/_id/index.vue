@@ -1,5 +1,5 @@
 <template>
-  <main class="[ page-article-id ][ stack ]">
+  <main class="[ page-article-id ][ stack stack-500 ]">
     <section class="section-data">
       <h2 class="title">
         {{ name }}
@@ -38,7 +38,7 @@
         </dl>
       </article>
     </section>
-    <section class="section-detalles stack stack-200">
+    <section class="section-detalles stack stack-300">
       <h3 class="subtitle">
         Información del producto
       </h3>
@@ -180,6 +180,10 @@ export default {
     gap: var(--space-500);
 
     max-width: 1000px;
+
+    > * {
+      margin-top: 0;
+    }
 
     > .section-data {
       padding-top: var(--space-100);
