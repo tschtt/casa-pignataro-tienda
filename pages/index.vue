@@ -66,35 +66,51 @@ export default {
 }
 
 .categorie {
-  display: grid;
-  grid-template-columns: 1fr max-content;
-  grid-template-rows: auto auto;
-  gap: var(--space-300);
-
   + .categorie {
     margin-top: var(--space-500);
   }
 
-  > .title {
-    grid-column: 1 / 2;
-    grid-row: 1;
+  > * + * {
+    margin-top: var(--space-400);
   }
 
-  > .links {
-    grid-column: 2 / 3;
-    grid-row: 1;
-  }
-
-  > .article-grid {
-    grid-column: 1 / 3;
-    grid-row: 2;
+  .links {
+    display: flex;
+    justify-content: end;
   }
 
   .link {
     --link-color-hover: var(--color-main);
     --link-color-focus: var(--color-gray-900);
   }
+}
+
+@media (min-width: 700px) {
+  .categorie {
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    grid-template-rows: auto auto;
+    gap: var(--space-300);
+
+    > * + * {
+      margin-top: 0;
+    }
   
+    > .title {
+      grid-column: 1 / 2;
+      grid-row: 1;
+    }
+  
+    > .links {
+      grid-column: 2 / 3;
+      grid-row: 1;
+    }
+  
+    > .article-grid {
+      grid-column: 1 / 3;
+      grid-row: 2;
+    }
+  }  
 }
 
 </style>
