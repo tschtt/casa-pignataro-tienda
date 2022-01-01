@@ -62,10 +62,17 @@ export default {
     padding: var(--space-500);
     z-index: 1;
   }
+
+  .app-footer-container {
+    border-top: 2px solid var(--color-gray-400);
+    background-color: var(--color-gray-300);
+    padding: var(--space-500);
+    z-index: 1; 
+  }
 }
 
 
-.app-header-container, .app-nav-container, .app-main-container {
+.app-header-container, .app-nav-container, .app-main-container, .app-footer-container {
 
   > * {
     max-width: 1000px;

@@ -182,7 +182,7 @@ export default {
     max-width: 1000px;
 
     > .section-data {
-      padding-top: 1em;
+      padding-top: var(--space-100);
       top: var(--space-500);
       position: -webkit-sticky;
       position: sticky;
