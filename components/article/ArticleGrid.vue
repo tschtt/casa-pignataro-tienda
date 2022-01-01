@@ -12,7 +12,7 @@ export default {
   props: {
     articles: {
       type: Array,
-      required: true,
+      default: () => [],
     }
   }
 }

@@ -46,27 +46,6 @@ export default {
 
 }
 
-@media (min-width: 1000px) {
-
-  .image-display {
-    --stack-space: 0;
-    
-    display: grid;
-    grid-template-columns: 100px 1fr;
-    gap: var(--space-200);
-
-    > .image-selected {
-      grid-column: 2 / -1;
-      grid-row: 1;
-    }
-
-    > .image-reel {
-      grid-column: 1 / 2;
-      grid-row: 1;
-    }
-    
-  }
-  
-}
+@me2
 
 </style>

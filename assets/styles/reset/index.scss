@@ -9,16 +9,13 @@
 }
 
 * {
+  scroll-behavior: smooth;
   margin: 0;
 }
 
 html, body, #__nuxt, #__layout {
   height: 100vh;
   min-width: fit-content;
-}
-
-html:focus-within {
-  scroll-behavior: smooth;
 }
 
 body {
@@ -56,7 +53,7 @@ a:not([class]) {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html:focus-within {
+  * {
    scroll-behavior: auto;
   }
   

@@ -1,7 +1,6 @@
 <template>
   <div class="image-reel">
     <button
-      class="card"
       v-for="(image, index) in images"
       :key="index"
       @click="click(index)"
@@ -44,7 +43,10 @@ export default {
   > * {
     flex: 0 0 100px;
     aspect-ratio: 1;
-    
+    background-color: var(--color-gray-100);
+    border-radius: 10px;
+    box-shadow: var(--shadow-100);
+    cursor: pointer;
   }
 
   .image {

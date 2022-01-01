@@ -16,13 +16,16 @@ body {
   letter-spacing: .05em;
 }
 
+a {
+  color: var(--color-gray-800);
+}
+
 pre {
   overflow-x: auto;
   white-space: pre-wrap;
   word-wrap: break-word;
   max-width: 60ch;
 }
-
 
 // Composition
 @import './composition/stack.scss';
