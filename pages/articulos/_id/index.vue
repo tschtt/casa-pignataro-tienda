@@ -21,7 +21,13 @@
       :images="images"
       @click="imageSelected=$event"
     />
-    <section id="detalles" class="section-categorias stack stack-400">
+    <section id="detalles" class="section-detalles stack stack-300">
+      <h3 class="subtitle">
+        Información del producto
+      </h3>
+      <pre>{{ description }}</pre>
+    </section>
+    <section class="section-categorias stack stack-400">
       <h3 class="subtitle">
         Categorias
       </h3>
@@ -37,12 +43,6 @@
           </div>
         </dl>
       </article>
-    </section>
-    <section class="section-detalles stack stack-300">
-      <h3 class="subtitle">
-        Información del producto
-      </h3>
-      <pre>{{ description }}</pre>
     </section>
   </main>
 </template>
@@ -170,6 +170,29 @@ export default {
   font-size: var(--text-600);
 }
 
+.section-data {
+
+  > * + * {
+    margin-top: var(--space-400);
+  }
+  
+  > .title {
+    font-size: 40px;
+    line-height: 1.1em;
+  }
+
+  > .subtitle {
+    font-size: 55px;
+    font-weight: 200;
+  }
+
+  > .link-detalles {
+    color: var(--color-gray-700);
+    font-size: var(--text-600);
+    font-weight: 500;
+  }
+}
+
 @media (min-width: 1000px) {
   
   .page-article-id {
@@ -187,10 +210,6 @@ export default {
 
     > .section-data {
       padding-top: var(--space-100);
-      top: var(--space-500);
-      position: -webkit-sticky;
-      position: sticky;
-      height: max-content;
       grid-column: 3 / 4;
       grid-row: 1 / -1;
     }
@@ -205,15 +224,41 @@ export default {
       grid-row: 1 / 5;
     }
 
-    > .section-categorias {
-      max-width: 60ch;
+    > .section-detalles {
       grid-column: 2 / 3;
       grid-row: 2 / 3;
     }
 
-    > .section-detalles {
+    > .section-categorias {
+      max-width: 60ch;
       grid-column: 2 / 3;
       grid-row: 3 / 4;
+    }
+  }
+
+  .section-data {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: var(--space-500);
+    padding-left: var(--space-400);
+
+    > .title {
+      font-size: 40px;
+      line-height: 1.1em;
+      grid-row: 1;
+    }
+
+    > .subtitle {
+      font-size: 55px;
+      font-weight: 200;
+      grid-row: 3;
+    }
+
+    > .link-detalles {
+      grid-row: 2;
+      color: var(--color-gray-700);
+      font-size: var(--text-600);
+      font-weight: 500;
     }
   }
   
