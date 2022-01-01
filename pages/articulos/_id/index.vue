@@ -21,7 +21,7 @@
       :images="images"
       @click="imageSelected=$event"
     />
-    <section id="detalles" class="section-categorias stack stack-200">
+    <section id="detalles" class="section-categorias stack stack-400">
       <h3 class="subtitle">
         Categorias
       </h3>
