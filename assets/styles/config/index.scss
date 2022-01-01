@@ -1,8 +1,8 @@
 
 :root {
-  --ff-heading: 'Heebo', sans-serif;
-  --ff-content: 'Tajawal', sans-serif;
-  --ff-icons: 'Material Icons', sans-serif; 
+  --ff-heading: 'Heebo', Arial, Helvetica, sans-serif;
+  --ff-content: 'Tajawal', Arial, Helvetica, sans-serif;
+  --ff-icons: 'Material Icons', Arial, Helvetica, sans-serif; 
 
   --color-main: hsl(360, 85%, 45%);
   --color-accent: hsl(225, 71%, 45%);
@@ -70,4 +70,13 @@
   --shadow-inner-300: inset 0 10px 20px hsla(221, 39%, 11%, .15), inset 0 3px 6px hsla(221, 39%, 11%, .10);
   --shadow-inner-200: inset 0 3px 6px hsla(221, 39%, 11%, .15), inset 0 2px 4px hsla(221, 39%, 11%, .12); 
   --shadow-inner-100: inset 0 1px 3px hsla(221, 39%, 11%, .12), inset 0 1px 2px hsla(221, 39%, 11%, .24);
+}
+
+@media (max-width: 600px) {
+
+  :root {
+    --ff-content: Arial, Helvetica, sans-serif;
+    // : sans-serif;
+  }
+  
 }
