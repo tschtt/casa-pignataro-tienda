@@ -46,6 +46,4 @@ export default {
 
 }
 
-@me2
-
 </style>
