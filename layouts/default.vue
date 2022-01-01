@@ -9,17 +9,24 @@
     <div class="app-main-container">
       <Nuxt />
     </div>
+    <div class="app-footer-container">
+      <LayoutFooter />
+    </div>
   </div>
 </template>
 
 <script>
 import { ref } from "@nuxtjs/composition-api"
+
 import LayoutHeader from "./-LayoutHeader.vue"
 import LayoutNav from "./-LayoutNav.vue"
+import LayoutFooter from "./-LatoutFooter.vue"
+
 export default {
   components: {
     LayoutHeader,
     LayoutNav,
+    LayoutFooter,
   },
   setup() {
     const showNav = ref(false)
