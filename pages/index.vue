@@ -76,7 +76,7 @@ export default {
 
   .links {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
   }
 
   .link {
