@@ -11,10 +11,13 @@
         Ver detalles
       </a>
     </section>
-    <img 
-      class="image-selected"
-      :src="images[imageSelected]" 
-    >
+    <transition name="fade">
+      <img 
+        class="image-selected"
+        :src="images[imageSelected]" 
+        :key="images[imageSelected]"
+      >
+    </transition>
     <ImageReel
       class="image-reel"
       :images="images"
