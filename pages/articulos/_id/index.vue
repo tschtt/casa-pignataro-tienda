@@ -2,10 +2,10 @@
   <main v-if="!loading" class="[ page-article-id ][ stack stack-500 ]">
     <section class="section-data">
       <h2 class="title">
-        {{ name }}
+        {{ article.name }}
       </h2>
       <p class="subtitle">
-        {{ value }}
+        {{ formatValue(article.value) }}
       </p>
       <a class="link-detalles color-gray-900" href="#detalles">
         Ver detalles
@@ -14,20 +14,20 @@
     <transition name="fade">
       <img 
         class="image-selected"
-        :src="images[imageSelected]" 
-        :key="images[imageSelected]"
+        :src="article.images[imageSelected]" 
+        :key="article.images[imageSelected]"
       >
     </transition>
     <ImageReel
       class="image-reel"
-      :images="images"
+      :images="article.images"
       @click="imageSelected=$event"
     />
     <section id="detalles" class="section-detalles stack stack-300">
       <h3 class="subtitle">
         Información del producto
       </h3>
-      <pre>{{ description }}</pre>
+      <pre>{{ article.description }}</pre>
     </section>
     <section class="section-categorias stack stack-400">
       <h3 class="subtitle">
@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import { computed, ref, useFetch, useRoute } from "@nuxtjs/composition-api"
+import { ref, useFetch, useRoute } from "@nuxtjs/composition-api"
 import { useResource } from "~/composables/index.js"
 import ImageReel from "~/components/image/ImageReel.vue";
 export default {
@@ -63,7 +63,7 @@ export default {
     
     // Reactive data
     const loading = ref(true)
-    const article = ref({});
+    const article = ref({})
     
     // Static data
     const id = $route.value.params.id;
@@ -88,24 +88,23 @@ export default {
       },
     ];
     
-    // Computed
-    const name = computed(() => {
-      return article.value.name || "Nombre del artículo";
-    });
+    // // Computed
+    // const name = computed(() => {
+    //   return article.value.name || "Nombre del artículo";
+    // });
     
-    const value = computed(() => {
+    const formatValue = (value = 0) => {
       const sign = "$";
-      const value = article.value.value || 0;
       return `${sign}${value.toFixed(2)}`;
-    });
+    }
     
-    const description = computed(() => {
-      return article.value.description;
-    });
+    // const description = computed(() => {
+    //   return article.value.description;
+    // });
     
-    const images = computed(() => {
-      return article.value.images || [];
-    });
+    // const images = computed(() => {
+    //   return article.value.images || [];
+    // });
 
     const imageSelected = ref(0)
     
@@ -117,13 +116,12 @@ export default {
     });
 
     return {
-      name,
-      value,
-      images,
-      description,
+      article,
       attributes,
 
       imageSelected,
+
+      formatValue,
 
       loading,
     };
