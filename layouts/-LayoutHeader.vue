@@ -57,7 +57,13 @@ export default {
     }
 
     const submit = () => {
-      $router.push(`/articulos?buscar=${search.value}`)
+      const query = {}
+
+      if(search.value) {
+        query.buscar = search.value
+      }
+      
+      $router.push({ path: '/articulos', query })
     }
 
     return {
