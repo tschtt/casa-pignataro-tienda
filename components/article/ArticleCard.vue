@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link class="article-card card" :to="to">
+  <nuxt-link class="article-card card" interactive :to="to">
     <article class="article-categorie article">
       <div class="image">
         <img 

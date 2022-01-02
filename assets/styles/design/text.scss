@@ -1,7 +1,55 @@
 
+.font-heading {
+  font-family: var(--ff-heading);
+}
+
+.font-content {
+  font-family: var(--ff-content);
+}
+
 .text-100 {
+  font-size: var(--text-100);
+  line-height: 1.5rem;
+}
+
+.text-200 {
   font-size: var(--text-200);
   line-height: 1.5rem;
+}
+
+.text-300 {
+  font-size: var(--text-300);
+  line-height: 1.5rem;
+}
+
+.text-400 {
+  font-size: var(--text-400);
+  line-height: 1.75rem;
+}
+
+.text-500 {
+  font-size: var(--text-500);
+  line-height: 1.75rem;
+}
+
+.text-600 {
+  font-size: var(--text-600);
+  line-height: 2rem;
+}
+
+.text-700 {
+  font-size: var(--text-700);
+  line-height: 2rem;
+}
+
+.text-800 {
+  font-size: var(--text-800);
+  line-height: 2.25rem;
+}
+
+.text-900 {
+  font-size: var(--text-900);
+  line-height: 2.5rem;
 }
 
 .title {
