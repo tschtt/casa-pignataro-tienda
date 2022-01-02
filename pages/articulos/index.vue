@@ -15,11 +15,16 @@
       v-if="articles.length"
       :articles="articles"
     />
+    <nav>
+      <button v-if="more" @click="loadArticles" class="button">
+        Mas resultados
+      </button>
+    </nav>
   </main>
 </template>
 
 <script>
-import { ref, useFetch, useRoute } from "@nuxtjs/composition-api"
+import { computed, ref, useFetch, useRoute } from "@nuxtjs/composition-api"
 import { useResource } from "~/composables/index.js"
 export default {
   key(route) {
@@ -30,29 +35,64 @@ export default {
     const $route = useRoute()
 
     const loading = ref(true)
-    const articles = ref([])
 
-    useFetch(async () => {
+    const articles = ref([])
+    
+    const limit = ref(12)
+    const offset = ref(0)
+    const more = ref(true)
+
+    const query = computed(() => {
       const { buscar, ...query } = $route.value.query
+
+      query.limit = limit.value
+      query.offset = offset.value
 
       if(buscar) {
         query.search = buscar
       }
-      
-      articles.value = await $articles.findMany(query)
 
+      return query
+    })
+    
+    const loadArticles = async () => {
+      const result = await $articles.findMany(query.value)
+
+      articles.value.push(...result)
+
+      if(result.length < limit.value) {
+        more.value = false
+      }
+
+      offset.value += limit.value;
+    }
+
+    useFetch(async () => {
+      await loadArticles()
       loading.value = false
     })
     
     return {
-      articles,
       loading,
+      articles,
+      loadArticles,
+      more,
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+
+.page-articulos {
+
+  > nav {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-500);
+  }
+
+}
 
 .no-results {
   display: flex;
