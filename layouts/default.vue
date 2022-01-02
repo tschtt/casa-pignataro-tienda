@@ -41,7 +41,7 @@ export default {
 
 #app {
   display: grid;
-  grid-template-rows: auto auto 1fr auto;
+  grid-template-rows: auto auto minmax(80vh, 1fr) auto;
   min-height: 100%;
   .app-header-container {
     background-image: linear-gradient(#f23b3b, #d71111);

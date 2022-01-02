@@ -1,27 +1,25 @@
 <template>
-  <main class="page-home">
+  <main v-if="!loading" class="page-home">
     <h2 class="hide-visually">
       Página principal
     </h2>
-    <template v-if="!loading">
-      <section 
-        v-for="categorie in categories" :key="categorie.order"
-        class="categorie"
-      >
-        <h3 class="title color-main">
-          {{ categorie.name }}
-        </h3>
-        <ArticleGrid 
-          class="article-grid"
-          :articles="categorie.articles" 
-        />
-        <nav class="links flex align-center">
-          <nuxt-link class="link color-main" :to="`/articulos?fkCategorie=${categorie.id}`">
-            Ver más
-          </nuxt-link>
-        </nav>
-      </section>
-    </template>
+    <section 
+      v-for="categorie in categories" :key="categorie.order"
+      class="categorie"
+    >
+      <h3 class="title color-main">
+        {{ categorie.name }}
+      </h3>
+      <ArticleGrid 
+        class="article-grid"
+        :articles="categorie.articles" 
+      />
+      <nav class="links flex align-center">
+        <nuxt-link class="link color-main" :to="`/articulos?fkCategorie=${categorie.id}`">
+          Ver más
+        </nuxt-link>
+      </nav>
+    </section>
   </main>
 </template>
 

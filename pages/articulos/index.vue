@@ -1,5 +1,5 @@
 <template>
-  <main class="[ page-articulos ][ stack stack-500 ]">
+  <main v-if="!loading" class="[ page-articulos ][ stack stack-500 ]">
     <h2 class="title color-main">
       Resultados
     </h2>
@@ -12,7 +12,7 @@
       </p>
     </div>
     <ArticleGrid
-      v-if="!loading && articles.length"
+      v-if="articles.length"
       :articles="articles"
     />
   </main>

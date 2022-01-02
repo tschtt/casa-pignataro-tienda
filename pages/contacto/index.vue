@@ -33,12 +33,14 @@
 </template>
 
 <script>
-import { onMounted, ref } from '@nuxtjs/composition-api'
+import { useFetch, ref } from '@nuxtjs/composition-api'
 import { useResource } from "~/composables"
 
 export default {
   setup() {
     const $contact = useResource('/contact')
+
+    const loading = ref(true)
 
     const items = ref([])
 
@@ -46,8 +48,13 @@ export default {
       items.value = await $contact.findMany({ active: 1 })
     }
 
-    onMounted(() => {
-      loadItems()
+    // onMounted(() => {
+    //   loadItems()
+    // })
+
+    useFetch(async () => {
+      await loadItems()
+      loading.value = false
     })
 
     return {
