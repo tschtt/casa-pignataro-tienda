@@ -1,14 +1,14 @@
 <template>
-  <main v-if="!loading" class="[ page-articulos ][ stack stack-500 ]">
+  <main v-if="!loading" class="[ page-articulos ][ stack stack-500 ]" :loading="loading">
     <h2 class="title color-main">
       Resultados
     </h2>
-    <div class="no-results" v-if="!loading && !articles.length">
+    <div class="no-results card" v-if="!articles.length">
       <span class="material-icons">
         content_paste_search
       </span>
       <p class="font-heading text-500">
-        No encontramos lo que estabas buscando
+        No encontramos resultados para tu busqueda
       </p>
     </div>
     <ArticleGrid
@@ -54,19 +54,12 @@ export default {
 
 <style lang="scss" scoped>
 
-.page-articulos {
-  display: grid;
-  grid-template-rows: auto 1fr;
-  height: 100%;
-}
-
 .no-results {
-  align-self: flex-start;
-  
   display: flex;
   align-items: center;
-  
+  justify-content: center;
   gap: var(--space-400);
+  padding: var(--space-600);
 
   > span {
     display: none;
@@ -74,7 +67,7 @@ export default {
   }
 
   > p {
-    max-width: 20ch;
+    max-width: 30ch;
   }
 }
 
