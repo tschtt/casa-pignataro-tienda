@@ -60,15 +60,16 @@ export default {
   justify-content: center;
   gap: var(--space-400);
   padding: var(--space-600);
+  
+  max-width: max-content;
+  margin-inline: auto;
+  
 
   > span {
     display: none;
     font-size: 50px;
   }
 
-  > p {
-    max-width: 30ch;
-  }
 }
 
 @media (min-width: 600px) {
