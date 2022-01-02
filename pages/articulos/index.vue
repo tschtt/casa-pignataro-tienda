@@ -1,5 +1,5 @@
 <template>
-  <main class="[ page-articulos ][ stack ]">
+  <main class="[ page-articulos ][ stack stack-500 ]">
     <h2 class="title color-main">
       Resultados
     </h2>
@@ -38,7 +38,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>
