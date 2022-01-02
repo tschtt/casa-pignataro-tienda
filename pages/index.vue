@@ -3,23 +3,25 @@
     <h2 class="hide-visually">
       Página principal
     </h2>
-    <section 
-      v-for="categorie in categories" :key="categorie.order"
-      class="categorie"
-    >
-      <h3 class="title color-main">
-        {{ categorie.name }}
-      </h3>
-      <ArticleGrid 
-        class="article-grid"
-        :articles="categorie.articles" 
-      />
-      <nav class="links flex align-center">
-        <nuxt-link class="link color-main" :to="`/articulos?fkCategorie=${categorie.id}`">
-          Ver más
-        </nuxt-link>
-      </nav>
-    </section>
+    <template v-if="!loading">
+      <section 
+        v-for="categorie in categories" :key="categorie.order"
+        class="categorie"
+      >
+        <h3 class="title color-main">
+          {{ categorie.name }}
+        </h3>
+        <ArticleGrid 
+          class="article-grid"
+          :articles="categorie.articles" 
+        />
+        <nav class="links flex align-center">
+          <nuxt-link class="link color-main" :to="`/articulos?fkCategorie=${categorie.id}`">
+            Ver más
+          </nuxt-link>
+        </nav>
+      </section>
+    </template>
   </main>
 </template>
 
@@ -33,9 +35,10 @@ export default {
     const $categories = useResource('/categories')
     const $articles = useResource('/articles')
 
+    const loading = ref(true)
     const categories = ref([])
 
-    useFetch(async () => {
+    const loadCategories = async () => {
       categories.value = await $categories.findMany()
       
       categories.value = categories.value.sort((a, b) => {
@@ -50,20 +53,22 @@ export default {
       })
 
       categories.value = await Promise.all(categories.value)
+    }
+
+    useFetch(async () => {
+      await loadCategories()
+      loading.value = false
     })
 
     return {
-      categories
+      categories,
+      loading,
     }
   },
 }
 </script>
 
 <style lang="scss" scoped>
-
-* {
-  // outline: 1px solid red;
-}
 
 .categorie {
   + .categorie {

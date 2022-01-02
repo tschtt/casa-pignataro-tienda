@@ -1,5 +1,5 @@
 <template>
-  <main class="[ page-article-id ][ stack stack-500 ]">
+  <main v-if="!loading" class="[ page-article-id ][ stack stack-500 ]">
     <section class="section-data">
       <h2 class="title">
         {{ name }}
@@ -14,7 +14,6 @@
     <img 
       class="image-selected"
       :src="images[imageSelected]" 
-      @click="imageSelected++"
     >
     <ImageReel
       class="image-reel"
@@ -60,6 +59,7 @@ export default {
     const $route = useRoute();
     
     // Reactive data
+    const loading = ref(true)
     const article = ref({});
     
     // Static data
@@ -110,16 +110,19 @@ export default {
 
     useFetch(async () => {
       article.value = await $articles.findOne(id);
+      loading.value = false
     });
 
     return {
-      article,
       name,
       value,
       images,
       description,
       attributes,
+
       imageSelected,
+
+      loading,
     };
   },
 }
