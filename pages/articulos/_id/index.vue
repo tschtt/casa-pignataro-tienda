@@ -11,13 +11,15 @@
         Ver detalles
       </a>
     </section>
-    <transition name="fade">
-      <img 
-        class="image-selected"
-        :src="article.images[imageSelected]" 
-        :key="article.images[imageSelected]"
-      >
-    </transition>
+    <div class="image-selected-container">
+      <transition name="fade">
+        <img 
+          class="image-selected"
+          :src="article.images[imageSelected]" 
+          :key="article.images[imageSelected]"
+        >
+      </transition>
+    </div>
     <ImageReel
       class="image-reel"
       :images="article.images"
@@ -157,13 +159,24 @@ export default {
   }
 }
 
-.image-selected {
+.image-selected-container {
+  position: relative;
   background-color: var(--color-gray-100);
   aspect-ratio: 1;
-  width: 100%;
   object-fit: contain;
   border-radius: 10px;
   box-shadow: var(--shadow-100);
+  overflow: hidden;
+
+  > * {
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+
+  }
 }
 .page-article-id {
   max-width: 600px;
@@ -218,7 +231,7 @@ export default {
       grid-row: 1 / -1;
     }
 
-    > .image-selected {
+    > .image-selected-container {
       grid-column: 2 / 3;
       grid-row: 1 / 2;
     }
