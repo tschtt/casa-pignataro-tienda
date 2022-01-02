@@ -1,7 +1,9 @@
 
 .flex {
+  --flex-gap: var(--space-200);
+  
   display: flex;
-  gap: var(--space-200);
+  gap: var(--flex-gap);
 }
 
 .justify-end {

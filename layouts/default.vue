@@ -66,7 +66,7 @@ export default {
   .app-footer-container {
     border-top: 2px solid var(--color-gray-400);
     background-color: var(--color-gray-300);
-    padding: var(--space-500);
+    padding: var(--space-400);
     z-index: 1; 
   }
 }

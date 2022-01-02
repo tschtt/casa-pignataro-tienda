@@ -3,13 +3,13 @@
     <h3 class="subtitle color-main">
       Contacto
     </h3>
-    <dl class="field-container stack">
+    <dl class="stack">
       <div 
         v-for="item in items" :key="item.order"
-        class="[ flex flex-center ]"
+        class="flex align-center"
       >
-        <dt>
-          <div class="material-icons [ flex flex-center ]" aria-hidden>
+        <dt class="flex align-center">
+          <div class="material-icons" aria-hidden>
             {{ item.icon }}
           </div>
           <div class="hide-visually">
@@ -52,8 +52,18 @@ export default {
 <style lang="scss" scoped>
 
 .layout-footer {
+  
   h3 {
+    font-size: var(--text-500);
     line-height: 1em;
+  }
+
+  dl {
+    --flex-gap: var(--space-900);
+  }
+
+  dd {
+    font-size: var(--text-100);
   }
 }
 
