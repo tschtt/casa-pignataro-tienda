@@ -256,7 +256,7 @@ export default {
   .section-data {
     display: grid;
     grid-template-rows: auto 1fr auto;
-    gap: var(--space-500);
+    gap: var(--space-300);
     padding-left: var(--space-400);
 
     > .title {

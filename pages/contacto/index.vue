@@ -1,7 +1,7 @@
 <template>
   <main class="page-contacto">
-    <h2 class="font-heading text-900">
-      Encontranos en:
+    <h2 class="title color-main">
+      Encontranos en
     </h2>
     <iframe 
       class="maps card"
