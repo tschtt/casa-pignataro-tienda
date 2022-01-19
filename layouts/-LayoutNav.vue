@@ -83,14 +83,6 @@ export default {
 
 @media (max-width: 700px) {
 
-  .layout-nav {
-    flex-direction: column;
-  }
-
-  .link {
-    display: block;
-  }
-  
   .layout-nav[hidden] {
     display: none;
   }
