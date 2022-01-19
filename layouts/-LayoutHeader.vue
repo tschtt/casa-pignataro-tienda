@@ -115,6 +115,9 @@ export default {
     font-size: var(--text-300);
     padding: var(--space-100);
     padding-left: var(--space-400);
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
     flex-grow: 1;
   }
 
