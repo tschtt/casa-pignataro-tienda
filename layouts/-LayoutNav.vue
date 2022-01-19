@@ -27,7 +27,7 @@ export default {
     const categories = ref([])
 
     useFetch(async () => {
-      categories.value = await $categories.findMany()
+      categories.value = await $categories.findMany({ onlyActive: true })
       categories.value = categories.value.sort((a, b) => {
         if(a.order < b.order) { return -1 }
         if(a.order > b.order) { return 1 }
