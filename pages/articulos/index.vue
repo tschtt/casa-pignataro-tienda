@@ -59,9 +59,9 @@ export default {
     const loadArticles = async () => {
       const result = await $articles.findMany(query.value)
 
-      articles.value.push(...result)
+      articles.value.push(...result.items)
 
-      if(result.length < limit.value) {
+      if(result.items.length < limit.value) {
         more.value = false
       }
 

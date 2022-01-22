@@ -46,7 +46,8 @@ export default {
       })
 
       categories.value = categories.value.map(async (categorie) => {
-        categorie.articles = await $articles.findMany({ onlyActive: true, fkCategorie: categorie.id, limit: 4 })
+        const result = await $articles.findMany({ onlyActive: true, fkCategorie: categorie.id, limit: 4 })
+        categorie.articles = result.items
         return categorie
       })
 
