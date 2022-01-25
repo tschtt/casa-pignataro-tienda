@@ -59,8 +59,9 @@ export default {
 
   .app-main-container {
     background-color: var(--color-gray-300);
-    padding: var(--space-500);
+    padding: var(--space-600) var(--space-500);
     z-index: 1;
+    
   }
 
   .app-footer-container {
@@ -75,7 +76,7 @@ export default {
 .app-header-container, .app-nav-container, .app-main-container, .app-footer-container {
 
   > * {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: auto;
   }
   

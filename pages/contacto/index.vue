@@ -68,7 +68,7 @@ export default {
 
 .page-contacto {
   display: grid;
-  gap: var(--space-400);
+  gap: var(--space-600);
 
   > .maps {
     width: 100%;
@@ -83,7 +83,7 @@ export default {
 
   .page-contacto {
     display: grid;
-    gap: var(--space-500) var(--space-600);
+    gap: var(--space-600) var(--space-600);
     grid-template-columns: 1.5fr 1fr;
     grid-template-rows: auto auto;
 
@@ -108,8 +108,6 @@ export default {
 
       .info-icon {
         color: var(--color-accent);
-        background-color: var();
-        
         padding: var(--space-200);
         border: 3px solid var(--color-accent);
         border-radius: 100%;

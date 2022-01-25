@@ -71,11 +71,7 @@ export default {
 
 .categorie {
   + .categorie {
-    margin-top: var(--space-500);
-  }
-
-  > * + * {
-    margin-top: var(--space-400);
+    margin-top: var(--space-700);
   }
 
   .links {
@@ -94,7 +90,7 @@ export default {
     display: grid;
     grid-template-columns: 1fr max-content;
     grid-template-rows: auto auto;
-    gap: var(--space-300);
+    gap: var(--space-600);
 
     > * + * {
       margin-top: 0;

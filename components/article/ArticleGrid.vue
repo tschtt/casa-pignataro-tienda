@@ -25,7 +25,7 @@ export default {
 
   display: grid;
   grid-template-columns: repeat(var(--grid-columns), 1fr);
-  gap: var(--space-500);
+  gap: var(--space-600);
 
   > * {
     display: block;

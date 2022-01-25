@@ -1,5 +1,5 @@
 <template>
-  <main v-if="!loading" class="[ page-articulos ][ stack stack-500 ]" :loading="loading">
+  <main v-if="!loading" class="[ page-articulos ][ stack stack-600 ]" :loading="loading">
     <h2 class="title color-main">
       Resultados
     </h2>
