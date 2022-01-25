@@ -47,7 +47,7 @@ export default {
 
       query.limit = limit.value
       query.offset = offset.value
-      query.onlyActive = true
+      query.active = true
 
       if(buscar) {
         query.search = buscar
@@ -78,6 +78,9 @@ export default {
       articles,
       loadArticles,
       more,
+
+      limit,
+      offset,
     }
   }
 }
