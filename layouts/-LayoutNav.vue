@@ -1,11 +1,11 @@
 <template>
   <nav class="layout-nav"  :hidden="!showNav">
     <nuxt-link 
-      v-for="categorie in categories" :key="categorie.id"
-      :to="`/articulos?fkCategorie=${categorie.id}`" 
+      v-for="section in sections" :key="section.id"
+      :to="`/articulos?fkSection=${section.id}`" 
       class="link" 
     >
-      {{ categorie.name }}
+      {{ section.name }}
     </nuxt-link>
   </nav>
 </template>
@@ -22,21 +22,21 @@ export default {
     },
   },
   setup() {
-    const $categories = useResource('/categories')
+    const $sections = useResource('/sections')
 
-    const categories = ref([])
+    const sections = ref([])
 
     useFetch(async () => {
-      categories.value = await $categories.findMany({ onlyActive: true })
-      categories.value = categories.value.sort((a, b) => {
-        if(a.order < b.order) { return -1 }
-        if(a.order > b.order) { return 1 }
+      sections.value = await $sections.findMany({ onlyActive: true })
+      sections.value = sections.value.sort((a, b) => {
+        if(a.name < b.name) { return -1 }
+        if(a.name > b.name) { return 1 }
         return 0
       })
     })
 
     return {
-      categories
+      sections
     }
   }
 }

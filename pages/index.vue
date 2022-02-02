@@ -4,18 +4,18 @@
       Página principal
     </h2>
     <section 
-      v-for="categorie in categories" :key="categorie.order"
+      v-for="section in sections" :key="section.order"
       class="categorie"
     >
       <h3 class="title color-main">
-        {{ categorie.name }}
+        {{ section.name }}
       </h3>
       <ArticleGrid 
         class="article-grid"
-        :articles="categorie.articles" 
+        :articles="section.articles" 
       />
       <nav class="links flex align-center">
-        <nuxt-link class="link color-main" :to="`/articulos?fkCategorie=${categorie.id}`">
+        <nuxt-link class="link color-main" :to="`/articulos?fkSection=${section.id}`">
           Ver más
         </nuxt-link>
       </nav>
@@ -24,43 +24,40 @@
 </template>
 
 <script>
+/* eslint-disable */
 import { ref, useFetch } from '@nuxtjs/composition-api'
 import { useResource } from '~/composables/index.js'
 
 
 export default {
   setup() {
-    const $categories = useResource('/categories')
+    const $sections = useResource('/sections')
     const $articles = useResource('/articles')
 
     const loading = ref(true)
-    const categories = ref([])
+    const sections = ref([])
 
-    const loadCategories = async () => {
-      categories.value = await $categories.findMany()
+    const load_sections = async () => {
+      sections.value = await $sections.findMany()
       
-      categories.value = categories.value.sort((a, b) => {
-        if(a.order < b.order) { return -1 }
-        if(a.order > b.order) { return 1 }
-        return 0
-      })
+      // categories.value = categories.value.sort((a, b) => {
+      //   if(a.name < b.name) { return -1 }
+      //   if(a.name > b.name) { return 1 }
+      //   return 0
+      // })
 
-      categories.value = categories.value.map(async (categorie) => {
-        const result = await $articles.findMany({ active: true, fkCategorie: categorie.id, limit: 4 })
-        categorie.articles = result.items
-        return categorie
-      })
-
-      categories.value = await Promise.all(categories.value)
+      for await (const section of sections.value) {
+        section.articles = await $articles.findMany({ active: true, fkSection: section.id, limit: 4 })
+      }
     }
 
     useFetch(async () => {
-      await loadCategories()
+      await load_sections()
       loading.value = false
     })
 
     return {
-      categories,
+      sections,
       loading,
     }
   },

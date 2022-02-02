@@ -31,22 +31,16 @@
       </h3>
       <pre>{{ article.description }}</pre>
     </section>
-    <section class="section-categorias stack stack-400">
+    <section v-if="article.attributes.length" class="section-categorias stack stack-400">
       <h3 class="subtitle">
-        Categorias
+        Características
       </h3>
-      <article
-        class="attribute-group"
-        v-for="group in attributes" :key="group.order"
-      >
-        <h4>{{ group.name }}</h4>
-        <dl class="definition-list">
-          <div v-for="attribute in group.attributes" :key="attribute.order">
-            <dt>{{ attribute.name }}</dt>
-            <dd>{{ attribute.value }}</dd>
-          </div>
-        </dl>
-      </article>
+      <dl class="definition-list">
+        <div v-for="(attribute, index) in article.attributes" :key="index">
+          <dt>{{ attribute.name }}</dt>
+          <dd>{{ attribute.value }}</dd>
+        </div>
+      </dl>
     </section>
   </main>
 </template>
@@ -69,26 +63,6 @@ export default {
     
     // Static data
     const id = $route.value.params.id;
-    const attributes = [
-      {
-        name: "Medidas",
-        order: 1,
-        attributes: [
-          { order: 0, name: "Alto (cm)", value: "85,0" },
-          { order: 1, name: "Ancho (cm)", value: "56,0" },
-          { order: 2, name: "Profundidad (cm)", value: "59,0" },
-        ],
-      },
-      {
-        name: "Otros datos",
-        order: 2,
-        attributes: [
-          { order: 0, name: "Tipo", value: "Multigas" },
-          { order: 1, name: "Color", value: "Gris" },
-          { order: 2, name: "Material", value: "Acero Inoxidable" },
-        ]
-      },
-    ];
     
     // // Computed
     // const name = computed(() => {
@@ -119,12 +93,8 @@ export default {
 
     return {
       article,
-      attributes,
-
       imageSelected,
-
       formatValue,
-
       loading,
     };
   },
@@ -151,6 +121,7 @@ export default {
   }
 
   dt {
+    font-weight: 500;
     flex: 1 0 0;
   }
 
