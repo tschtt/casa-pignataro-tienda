@@ -116,8 +116,8 @@ export default {
 .definition-list {
   > * {
     display: flex;
-    border-bottom: 1px solid var(--color-gray-900);
-    padding-block: var(--space-100);
+    border-bottom: 1px solid var(--color-gray-500);
+    padding-block: var(--space-200);
   }
 
   dt {
