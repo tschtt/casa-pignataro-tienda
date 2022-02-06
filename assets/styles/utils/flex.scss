@@ -6,6 +6,10 @@
   gap: var(--flex-gap);
 }
 
+.flex-column {
+  flex-direction: column;
+}
+
 .justify-end {
   justify-content: end;
 }
