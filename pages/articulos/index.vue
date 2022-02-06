@@ -74,13 +74,13 @@ export default {
     
     const setOrder = (event) => {
       if(event.target.value === 'menor') {
-        $router.replace({ path: '/articulos', query: { ...$route.value.query, order_by: 'value', order: 'desc' } })
+        $router.replace({ path: '/articulos', query: { ...$route.value.query, orderBy: 'value', order: 'desc' } })
       }
       else if(event.target.value === 'mayor') {
-        $router.replace({ path: '/articulos', query: { ...$route.value.query, order_by: 'value', order: 'asc' } })
+        $router.replace({ path: '/articulos', query: { ...$route.value.query, orderBy: 'value', order: 'asc' } })
       } 
       else {
-        $router.replace({ path: '/articulos', query: { ...$route.value.query, order_by: undefined, order: undefined } })
+        $router.replace({ path: '/articulos', query: { ...$route.value.query, orderBy: undefined, order: undefined } })
       }
     }
     
