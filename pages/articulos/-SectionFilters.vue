@@ -247,6 +247,7 @@ ul {
     color: var(--color-gray-600);
     flex-basis: 0;
     flex-grow: 1;
+    width: 15ch;
     background-color: transparent;
     border: none;
     border-left: 1px solid var(--border-color);
@@ -254,6 +255,13 @@ ul {
     -moz-appearance: textfield;
     margin: 0;
     padding: var(--space-300) var(--space-500);
+
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+    }
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
   }
 
   button {
