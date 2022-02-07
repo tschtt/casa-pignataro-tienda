@@ -11,7 +11,7 @@
     </section>
     <section v-if="more" class="section actions card">
       <h3 class="hide-visually">Acciones</h3>
-      <button class="icon-before" icon="add">
+      <button class="icon-before" icon="add" @click="loadMore">
         Más artículos
       </button>
     </section>
@@ -51,6 +51,10 @@ export default {
     const query = computed(() => {
       const result = {}
       const { search, orderBy, order, minValue, maxValue, fkSection, fkCategory, fkAttributeValue } = $route.value.query
+
+      result.limit = state.limit
+      result.offset = state.offset
+      
       if(search) {
         result.search = search
       }
@@ -85,6 +89,7 @@ export default {
     // actions
 
     async function loadMore() {
+      console.log('More!!')
       const result = await $articles.findMany(query.value)
       state.articles.push(...result)
       state.offset += state.limit
