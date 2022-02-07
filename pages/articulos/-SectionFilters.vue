@@ -1,70 +1,80 @@
 <template>
-  <details class="section-filters card" open>
-    <summary class="summary">Filtros</summary>
-    <nav class="content">
-      <ul class="stack stack-400">
-        <li class="stack stack-200">
-          <p class="text-400 bold">Valor</p>
-          <form class="flex" @submit.prevent="$router.push({ path: '/articulos', query: { ...$route.query, minValue: minValue_local || undefined, maxValue: maxValue_local || undefined } })">
-            <div>
-              <label class="hide-visually" for="minValue">Mínimo</label>
-              <input v-model="minValue_local" type="number" name="minValue" id="minValue" size="5" placeholder="minimo">
-            </div>
-            <div>
-              <label class="hide-visually" for="maxValue">Máximo</label>
-              <input v-model="maxValue_local" type="number" name="maxValue" id="maxValue" size="5" placeholder="maximo">
-            </div>
-            <button>
-              >
-            </button>
-          </form>
-        </li>
-        <li v-if="sections">
-          <p class="text-400 bold">Secciones</p>
-          <ul>
-            <li v-for="section in sections" :key="section.id">
-              <nuxt-link :to="{ path: '/articulos', query: { ...$route.query, fkSection: section.id } }">
-                {{section.name}} ({{section.count}})
-              </nuxt-link>
-            </li>
-          </ul>
-        </li>
-        <li v-if="categories">
-          <p class="text-400 bold">Categorias</p>
-          <ul>
-            <li v-for="category in categories" :key="category.id">
-              <nuxt-link :to="{ path: '/articulos', query: { ...$route.query, fkCategory: category.id } }">
-                {{category.name}} ({{category.count}})
-              </nuxt-link>
-            </li>
-          </ul>
-        </li>
-        <li v-for="attribute in attributes" :key="attribute.id">
-          <p class="text-400 bold">{{ attribute.name }}</p>
-          <ul>
-            <li v-for="value in attribute.options" :key="value.id">
-              <nuxt-link :to="{ path: '/articulos', query: { ...$route.query, fkAttributeValue: value.id } }">
-                {{value.name}} ({{value.count}})
-              </nuxt-link>
-            </li>            
-          </ul>
+  <section class="section section-filters card">
+    <h3 class="hide-visually">Filtros</h3>
+    <div class="filter-actions">
+      <button class="icon-before" icon="import_export" @click="toggle_sort">Ordenar</button>
+      <button class="icon-before" icon="tune" @click="toggle_filters">Filtrar</button>
+    </div>
+    <article class="filter-item filter-order" :open="showSort">
+      <header>
+        <h4>Ordenar por</h4>
+      </header>
+      <ul>
+        <li><nuxt-link :to="get_link({ orderBy: undefined, order: undefined })" :selected="current_order === 'none'">Mas relevantes</nuxt-link></li>
+        <li><nuxt-link :to="get_link({ orderBy: 'value', order: 'asc' })"       :selected="current_order === 'asc'">Menor precio</nuxt-link></li>
+        <li><nuxt-link :to="get_link({ orderBy: 'value', order: 'desc' })"      :selected="current_order === 'desc'">Mayor precio</nuxt-link></li>
+      </ul>
+    </article>
+    <article class="filter-item filter-value" :open="showFilters">
+      <header>
+        <h4>Precio</h4>
+      </header>
+      <form class="filter-value-container" @submit.prevent="$router.push(link_value)">
+        <label class="hide-visually" for="minValue">Mínimo</label>
+        <input v-model="minValue" type="number" name="minValue" id="minValue" size="5" placeholder="Mínimo">
+        <label class="hide-visually" for="maxValue">Máximo</label>
+        <input v-model="maxValue" type="number" name="maxValue" id="maxValue" size="5" placeholder="Máximo">
+        <button class="filter-button" :to="link_value">
+          <span class="hide-visually">Filtrar</span>
+          <span class="material-icons">arrow_forward</span>
+        </button>
+      </form>
+    </article>
+    <article class="filter-item filter-section" :open="showFilters" v-if="sections">
+      <header>
+        <h4>Secciones</h4>
+      </header>
+      <ul>
+        <li v-for="section in sections" :key="section.id">
+          <nuxt-link :to="get_link({ fkSection: section.id })" :selected="$route.query.fkSection == section.id">
+            <span class="name">{{section.name}}</span>
+            <span class="count">{{section.count}}</span>
+          </nuxt-link>
         </li>
       </ul>
-    </nav>
-  </details>
+    </article>
+    <article class="filter-item filter-category" :open="showFilters" v-if="categories">
+      <header>
+        <h4>Categorias</h4>
+      </header>
+      <ul>
+        <li v-for="category in categories" :key="category.id">
+          <nuxt-link :to="get_link({ fkCategory: category.id })" :selected="$route.query.fkCategory == category.id">
+            <span class="name">{{category.name}}</span>
+            <span class="count">{{category.count}}</span>
+          </nuxt-link>
+        </li>
+      </ul>
+    </article>
+    <article class="filter-item filter-attribute" :open="showFilters" v-for="attribute in attributes" :key="attribute.id">
+      <header>
+        <h4>{{ attribute.name }}</h4>
+      </header>
+      <ul>
+        <li v-for="value in attribute.options" :key="value.id">
+          <nuxt-link :to="get_link({ fkAttributeValue: value.id })" :selected="$route.query.fkAttributeValue == value.id">
+            <span class="name">{{value.name}}</span>
+            <span class="count">{{value.count}}</span>
+          </nuxt-link>
+        </li>            
+      </ul>
+    </article>
+  </section>
 </template>
 
 <script>
 export default {
   props: {
-    minValue: {
-      type: Number,
-      default: 0,
-    },
-    maxValue: {
-      type: Number,
-      default: 0,
-    },
     sections: {
       type: Array,
       default: null,
@@ -80,35 +90,67 @@ export default {
   },
   data() {
     return {
-      minValue_local: '',
-      maxValue_local: '',
+      minValue: '',
+      maxValue: '',
+      showFilters: false,
+      showSort: false,
     }
   },
+  mounted() {
+    this.load_value()
+  },
   computed: {
-    sections_local: {
-      get() {
-        return this.sections
-      },
-      set(value) {
-        this.$emit('update:sections', value)
+    
+    current_order() {
+      const { orderBy, order } = this.$route.query
+      
+      if(orderBy === 'value' && order === 'desc') {
+        return 'desc'
+      } else if(orderBy === 'value' && order === 'asc') {
+        return 'asc'
+      } else if(orderBy === undefined && order === undefined) {
+        return 'none'
+      }
+      return undefined
+    },
+
+    link_order_none() {
+      return this.get_link({ orderBy: undefined, order: undefined })
+    },
+    link_order_desc() {
+      return this.get_link({ orderBy: 'value', order: 'desc' })
+    },
+    link_order_asc() {
+      return this.get_link({ orderBy: 'value', order: 'asc' })
+    },
+    
+    link_value() {
+      const minValue = this.minValue || undefined
+      const maxValue = this.maxValue || undefined
+      return this.get_link({ minValue, maxValue })
+    },
+  },
+  methods: {
+    get_link(query) {
+      return { page: '/articulos', query: { ...this.$route.query, ...query } }
+    },
+    load_value() {
+      const { minValue, maxValue } = this.$route.query
+      if(minValue) {
+        this.minValue = minValue
+      }
+      if(maxValue) {
+        this.maxValue = maxValue
       }
     },
-    categories_local: {
-      get() {
-        return this.categories
-      },
-      set(value) {
-        this.$emit('update:categories', value)
-      }
+    toggle_filters() {
+      this.showSort = false
+      this.showFilters = !this.showFilters
     },
-    attributes_local: {
-      get() {
-        return this.attributes
-      },
-      set(value) {
-        this.$emit('update:attributes', value)
-      }
-    },
+    toggle_sort() {
+      this.showFilters = false
+      this.showSort = !this.showSort
+    }
   }
 }
 </script>
@@ -119,42 +161,153 @@ ul {
   padding: 0;
 }
 
-a {
-  text-decoration: none;
-  &:hover {
-    text-decoration: underline;
+.section-filters {
+  --border-color: var(--color-gray-400);
+}
+
+.filter-actions {
+  display: flex;
+  justify-content: space-around;
+  padding: var(--space-200);
+  
+  > button + button {
+    border-left: 1px solid var(--border-color);
+  }
+  
+  > button {
+    flex-basis: 0;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-100);
+    padding: var(--space-200);
+    background: transparent;
+    cursor: pointer;
   }
 }
 
-.flex {
-  > * {
-    // min-width: 0;
-    flex-basis: 0;
+.filter-item {
+
+  &:not([open]) {
+    display: none;
+  }
+  
+  header {
+    border-top: 1px solid var(--border-color);
+    padding: var(--space-300) var(--space-500);
+    font-size: 18px;
+    letter-spacing: .1em;
+    font-weight: bold;
+  }
+  
+  a {
+    display: block;
+    
+    color: var(--color-gray-600);
+    text-decoration: none;
+    
+    border-left: 3px solid transparent;
+    border-top: 1px solid var(--border-color);
+    
+    padding: var(--space-300) var(--space-500);
+
+    transition: color 200ms ease border 200ms ease;
+
+    &:hover {
+      color: var(--color-gray-900);
+      // border-left: 3px solid var(--color-gray-900);
+    }
+
+    &[selected] {
+      color: var(--color-gray-900);
+      border-left: 3px solid var(--color-main);
+    }
   }
 
-  > div {
-    background-color: red;
-    flex-grow: 1;
+}
+
+.filter-order {
+  header {
+    display: none;
+  }
+}
+
+.filter-value {
+  
+  &-container {
+    border-top: 1px solid var(--border-color);
+    // padding: var(--space-100) var(--space-500);
+    display: flex;
   }
 
   input {
-    width: 100%;
+    font-size: var(--text-200);
+    letter-spacing: 0.1em;
+    color: var(--color-gray-600);
+    flex-basis: 0;
+    flex-grow: 1;
+    background-color: transparent;
+    border: none;
+    border-left: 1px solid var(--border-color);
     -webkit-appearance: none;
     -moz-appearance: textfield;
     margin: 0;
+    padding: var(--space-300) var(--space-500);
   }
+
+  button {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    background-color: transparent;
+    align-items: center;
+    text-decoration: none;
+    padding: var(--space-300) var(--space-300);
+    border-top: none;
+    border-left: 1px solid var(--border-color);
+    color: var(--color-gray-600);
+  
+    &:hover {
+      color: var(--color-gray-900);
+    }
+  }
+
 }
 
-.section-filters {
-  padding: var(--space-400) var(--space-500);
+.filter-section,
+.filter-category,
+.filter-attribute {
 
-  > .summary {
-    cursor: pointer;
+  a {
+    display: flex;
+    gap: var(--space-200);
+    justify-content: space-between;
+    padding-right: var(--space-400);
   }
 
-  > * + * {
-    margin-top: var(--space-400);
+  // .count::before {
+  //   content: '('
+  // }
+  // .count::after {
+  //   content: ')'
+  // }
+}
+
+@media (min-width: 900px) {
+
+  .filter-actions {
+    display: none;
   }
+
+  .filter-item:not([open]) {
+    display: block;
+  }
+
+  .filter-order header {
+    display: block;
+  }
+  
 }
 
 </style>

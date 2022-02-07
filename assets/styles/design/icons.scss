@@ -43,6 +43,22 @@
   content: 'menu';
 }
 
+.icon-before[icon=import_export]::before {
+  content: 'import_export';
+}
+
+.icon-before[icon=tune]::before {
+  content: 'tune';
+}
+
+.icon-before[icon=add]::before {
+  content: 'add';
+}
+
+.icon-before[icon=arrow_back]::before {
+  content: 'arrow_back';
+}
+
 /* ----- Icon After ----- */
 
 .icon-after::after {

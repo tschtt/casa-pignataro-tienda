@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :overflow="overflow">
     <div class="app-header-container">
       <LayoutHeader :show-nav.sync="showNav" />
     </div>
@@ -28,6 +28,14 @@ export default {
     LayoutNav,
     LayoutFooter,
   },
+  data() {
+    return {
+      overflow: true
+    }
+  },
+  created() {
+    this.$nuxt.$on('toggle-overlay', () => { this.overflow = !this.overflow })
+  },
   setup() {
     const showNav = ref(false)
     return {
@@ -43,11 +51,17 @@ export default {
   display: grid;
   grid-template-rows: auto auto minmax(80vh, 1fr) auto;
   min-height: 100%;
+  position: relative;
+
+  &:not([overflow]) {
+    max-height: 100%;
+    overflow: hidden; 
+  }
+  
   .app-header-container {
     background-image: linear-gradient(#f23b3b, #d71111);
     box-shadow: var(--shadow-200);
     z-index: 3;
-
 }
 
   .app-nav-container {
@@ -60,7 +74,7 @@ export default {
   .app-main-container {
     background-color: var(--color-gray-300);
     padding: var(--space-600) var(--space-500);
-    z-index: 1;
+    // z-index: 1;
     
   }
 
@@ -68,10 +82,9 @@ export default {
     border-top: 2px solid var(--color-gray-400);
     background-color: var(--color-gray-300);
     padding: var(--space-400);
-    z-index: 1; 
+    // z-index: 1; 
   }
 }
-
 
 .app-header-container, .app-nav-container, .app-main-container, .app-footer-container {
 

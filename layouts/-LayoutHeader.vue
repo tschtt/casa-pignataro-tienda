@@ -60,7 +60,7 @@ export default {
       const query = {}
 
       if(search.value) {
-        query.buscar = search.value
+        query.search = search.value
       }
       
       $router.push({ path: '/articulos', query })

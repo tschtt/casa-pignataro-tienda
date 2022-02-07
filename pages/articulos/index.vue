@@ -1,38 +1,30 @@
 <template>
-  <main v-if="!loading" class="[ page-articulos ][  ]" :loading="loading">
-    <h2 class="title color-main">
-      Resultados
-    </h2>
-    <div class="no-results card" v-if="!articles.length">
-      <span class="material-icons">
-        content_paste_search
-      </span>
-      <p class="font-heading text-500">
-        No encontramos resultados para tu busqueda
-      </p>
-    </div>
-    <div class="order">
-      <label for="order-by">Ordenar por</label>
-      <select id="order-by" v-model="orderBy" @input="setOrder">
-        <option value="ninguno">Mas relevantes</option>
-        <option value="menor">Mayor precio</option>
-        <option value="mayor">Menor precio  </option>
-      </select>
-    </div>
-    <SectionFilters class="filters" v-if="articles.length" v-bind.sync="filters" />
-    <ArticleGrid class="results" v-if="articles.length" :articles="articles" />
-    <nav class="actions">
-      <button v-if="more" @click="loadArticles" class="button">
-        Mas resultados
+  <main class="page-articles">
+    <header class="header">
+      <h2 class="title color-main">{{ query.search && `Resultados para: ${query.search}` || 'Resultados de la busqueda' }}</h2>
+      <p>{{ count }} resultados</p>
+    </header>
+    <SectionFilters class="section filters card" v-bind="filters" />
+    <section class="section results">
+      <h3 class="hide-visually">Listado de resultados</h3>
+      <ArticleGrid :articles="articles" />
+    </section>
+    <section v-if="more" class="section actions card">
+      <h3 class="hide-visually">Acciones</h3>
+      <button class="icon-before" icon="add">
+        Más artículos
       </button>
-    </nav>
+    </section>
   </main>
 </template>
 
 <script>
-import { computed, ref, useFetch, useRoute, useRouter } from "@nuxtjs/composition-api"
-import SectionFilters from "./-SectionFilters.vue"
+/* eslint-disable */
+import { computed, reactive, toRefs, useFetch, useRoute } from '@nuxtjs/composition-api'
 import { useResource } from "~/composables/index.js"
+
+import SectionFilters from './-SectionFilters.vue'
+
 export default {
   components: {
     SectionFilters,
@@ -40,167 +32,212 @@ export default {
   key(route) {
     return route.fullPath
   },
-  setup() {
+  setup(props, { emit }) {
     const $articles = useResource('/articles')
     const $route = useRoute()
-    const $router = useRouter()
-
-    const loading = ref(true)
-
-    const articles = ref([])
-    const filters = ref({})
     
-    const orderBy = ref('ninguno')
-    const limit = ref(12)
-    const offset = ref(0)
-    const more = ref(true)
+    // data
+    
+    const state = reactive({
+      count: 0,
+      articles: [],
+      filters: {},
+      limit: 12,
+      offset: 0,
+    })
+
+    // computed
 
     const query = computed(() => {
-      const { buscar, ...query } = $route.value.query
-
-      query.faceted = true
-      query.limit = limit.value
-      query.offset = offset.value
-      query.active = true
-
-      if(buscar) {
-        query.search = buscar
+      const result = {}
+      const { search, orderBy, order, minValue, maxValue, fkSection, fkCategory, fkAttributeValue } = $route.value.query
+      if(search) {
+        result.search = search
       }
-
-      console.log(query)
-
-      return query
+      if(orderBy) {
+        result.orderBy = orderBy
+      }
+      if(order) {
+        result.order = order
+      }
+      if(minValue) {
+        result.minValue = minValue
+      }
+      if(maxValue) {
+        result.maxValue = maxValue
+      }
+      if(fkSection) {
+        result.fkSection = fkSection
+      }
+      if(fkCategory) {
+        result.fkCategory = fkCategory
+      }
+      if(fkAttributeValue) {
+        result.fkAttributeValue = fkAttributeValue
+      }
+      return result
     })
-    
-    const setOrder = (event) => {
-      if(event.target.value === 'menor') {
-        $router.replace({ path: '/articulos', query: { ...$route.value.query, orderBy: 'value', order: 'desc' } })
-      }
-      else if(event.target.value === 'mayor') {
-        $router.replace({ path: '/articulos', query: { ...$route.value.query, orderBy: 'value', order: 'asc' } })
-      } 
-      else {
-        $router.replace({ path: '/articulos', query: { ...$route.value.query, orderBy: undefined, order: undefined } })
-      }
-    }
-    
-    const loadArticles = async () => {
+
+    const more = computed(() => {
+      return state.offset < state.count
+    })
+
+    // actions
+
+    async function loadMore() {
       const result = await $articles.findMany(query.value)
-      
-      filters.value = result.filters
-      articles.value.push(...result.items)
-
-      if(result.length < limit.value) {
-        more.value = false
-      }
-
-      offset.value += limit.value;
+      state.articles.push(...result)
+      state.offset += state.limit
     }
+
+    async function load() {
+      const result = await $articles.findMany({ faceted: true, ...query.value })
+      state.count = result.count
+      state.articles = result.items
+      state.filters = result.filters
+      state.offset += state.limit
+    }
+
+    // init
 
     useFetch(async () => {
-      await loadArticles()
-      loading.value = false
+      await load()
     })
-    
+
     return {
-      loading,
-      articles,
-      filters,
-      orderBy,
-      loadArticles,
+      ...toRefs(state),
+      loadMore,
+      query,
       more,
-
-      setOrder,
-
-      limit,
-      offset,
     }
-  }
+  },
 }
 </script>
 
 <style lang="scss" scoped>
 
-.page-articulos {
-
+.page-articles {
   display: grid;
-  gap: var(--space-500) var(--space-500);
-
-  > nav {
-    display: flex;
-    justify-content: center;
-    gap: var(--space-500);
-  }
-
-}
-
-.no-results {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   gap: var(--space-400);
-  padding: var(--space-600);
-  
-  max-width: max-content;
-  margin-inline: auto;
-  
-
-  > span {
-    display: none;
-    font-size: 50px;
-  }
-
 }
 
-@media (min-width: 600px) {
-
-  .no-results {
-    place-self: center;
-
-    > span {
-      display: block;
-    }
+.header {
+  > * + * {
+    margin-top: var(--space-200);
   }
-  
 }
 
-@media (min-width: 1000px) {
-  
-  .page-articulos {
-    grid-template-columns: minmax(30ch, max-content) 1fr auto;
+.filters {
 
-    > .title {
-      grid-column: 1 / 3;
-      grid-row: 1;
-    }
-
-    > .order {
-      grid-column: 3 / 4;
-      grid-row: 1;
-    }
-
-    > .no-results {
-      grid-column: 1 / -1;
-      grid-row: 2;
-    }
-
-    > .filters {
-      grid-column: 1 / 2;
-      grid-row: 2;
-      align-self: baseline;
-    }
-
-    > .results {
-      grid-column: 2 / -1;
-      grid-row: 2;
-    }
-
-    > .actions {
-      grid-column: 2 / -1;
-      grid-row: 3;
-    }
+  ul {
+    padding: 0;
   }
   
+  a {
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    color: var(--color-gray-600);
+    padding: var(--space-300) var(--space-500);
+    border-top: 1px solid var(--color-gray-400);
+    border-left: 3px solid transparent;
+    display: block;
+  }
+
+  a:hover {
+    color: var(--color-gray-900);
+  }
+
+  a[selected] {
+    border-left: 3px solid var(--color-main);
+    color: var(--color-gray-900);
+  }
+  .filters-actions {
+    display: flex;
+    justify-content: space-around;
+    padding: var(--space-200);
+  
+    > button + button {
+      border-left: 1px solid var(--color-gray-400);
+    }
+  
+    > button {
+      flex-basis: 0;
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-100);
+      padding: var(--space-200);
+      background: transparent;
+      cursor: pointer;
+    }
+  }
+}
+
+.results {
+  .article-grid {
+    --grid-columns-100: 1;
+    --grid-columns-200: 2;
+    --grid-columns-300: 3;      
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: space-around;
+  padding: var(--space-200);
+  transition: box-shadow 200ms ease;
+
+  &:hover {
+    box-shadow: var(--shadow-300);
+  }
+
+  > button + button {
+    border-left: 1px solid var(--color-gray-400);
+  }
+
+  > button {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: .1em;
+    flex-basis: 0;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-100);
+    padding: var(--space-200);
+    background: transparent;
+    cursor: pointer;
+  }
+}
+
+@media (min-width: 900px) {
+  .page-articles {
+    grid-template-columns: minmax(30ch, max-content) 1fr;
+    gap: var(--space-600);
+  }
+
+  .header {
+    grid-column: 1 / -1;
+    grid-row: 1 / 2;
+  }
+
+  .filters {
+    align-self: baseline;
+    grid-column: 1 / 2;
+    grid-row: 2 / 4;
+  }
+
+  .results {
+    grid-column: 2 / -1;
+    grid-row: 2 / 3;
+  }
+
+  .actions {
+    grid-column: 2 / -1;
+    grid-row: 3 / 4;
+  }
 }
 
 </style>

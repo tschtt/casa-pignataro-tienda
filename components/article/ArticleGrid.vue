@@ -21,7 +21,7 @@ export default {
 <style lang="scss" scoped>
 
 .article-grid {
-  --grid-columns: 1;
+  --grid-columns: var(--grid-columns-100, 1);
 
   display: grid;
   grid-template-columns: repeat(var(--grid-columns), 1fr);
@@ -32,15 +32,15 @@ export default {
   }
 }
 
-@media (min-width: 500px) {
+@media (min-width: 600px) {
   .article-grid {
-    --grid-columns: 2;
+      --grid-columns: var(--grid-columns-200, 2);
   }
 }
 
-@media (min-width: 800px) {
+@media (min-width: 1100px) {
   .article-grid {
-    --grid-columns: 4;
+    --grid-columns: var(--grid-columns-300, 4);
   }
 }
 
