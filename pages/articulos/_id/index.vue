@@ -31,7 +31,7 @@
       </h3>
       <pre>{{ article.description }}</pre>
     </section>
-    <section v-if="article.attributes.length" class="section-categorias stack stack-400">
+    <section v-if="article.attributes && article.attributes.length" class="section-categorias stack stack-400">
       <h3 class="subtitle">
         Características
       </h3>
