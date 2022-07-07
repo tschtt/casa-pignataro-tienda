@@ -25,12 +25,7 @@
       :images="article.images"
       @click="imageSelected=$event"
     />
-    <section id="detalles" class="section-detalles stack stack-300" v-if="article.description">
-      <h3 class="subtitle">
-        Información del producto
-      </h3>
-      <pre>{{ article.description }}</pre>
-    </section>
+    <span id="detalles"></span>
     <section v-if="article.attributes && article.attributes.length" class="section-categorias stack stack-400">
       <h3 class="subtitle">
         Características
@@ -41,6 +36,12 @@
           <dd>{{ attribute.value }}</dd>
         </div>
       </dl>
+    </section>
+    <section class="section-detalles stack stack-300" v-if="article.description">
+      <h3 class="subtitle">
+        Información del producto
+      </h3>
+      <pre>{{ article.description }}</pre>
     </section>
   </main>
 </template>
@@ -217,13 +218,13 @@ export default {
       grid-row: 1 / 5;
     }
 
-    > .section-detalles {
+    > .section-categorias {
+      max-width: 60ch;
       grid-column: 2 / 3;
       grid-row: 2 / 3;
     }
 
-    > .section-categorias {
-      max-width: 60ch;
+    > .section-detalles {
       grid-column: 2 / 3;
       grid-row: 3 / 4;
     }
