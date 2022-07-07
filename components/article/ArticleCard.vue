@@ -15,7 +15,7 @@
         {{ shortDescription }}
       </p>
       <p class="value">
-        $ {{ value.toFixed(2) }}
+        {{ valueFormatted }}
       </p>
     </article>
   </nuxt-link>
@@ -49,6 +49,14 @@ export default {
 
     to() {
       return `/articulos/${this.id}`
+    },
+
+    valueFormatted() {
+      return this.value.toLocaleString('es-AR', { 
+        maximumFractionDigits: 2, 
+        currency: 'ARS',
+        style: 'currency'
+      })
     }
     
   }
