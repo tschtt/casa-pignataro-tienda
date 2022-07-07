@@ -3,6 +3,7 @@
     <article class="article-categorie article">
       <div class="image">
         <img 
+          v-if="images[0]"
           :src="images[0]"
           height="200"
           width="200"
