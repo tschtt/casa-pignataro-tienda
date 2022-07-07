@@ -7,7 +7,7 @@
       <p class="subtitle">
         {{ formatValue(article.value) }}
       </p>
-      <a class="link-detalles color-gray-900" href="#detalles" v-if="article.description || article.shortDescription">
+      <a class="link-detalles color-gray-900" href="#detalles" v-if="article.description">
         Ver detalles
       </a>
     </section>
@@ -30,12 +30,6 @@
         Información del producto
       </h3>
       <pre>{{ article.description }}</pre>
-    </section>
-    <section id="detalles" class="section-detalles-cortos stack stack-300" v-if="article.shortDescription">
-      <h3 class="subtitle">
-        Mas Detalles
-      </h3>
-      <pre>{{ article.shortDescription }}</pre>
     </section>
     <section v-if="article.attributes && article.attributes.length" class="section-categorias stack stack-400">
       <h3 class="subtitle">
@@ -228,15 +222,10 @@ export default {
       grid-row: 2 / 3;
     }
 
-    > .section-detalles-cortos {
-      grid-column: 2 / 3;
-      grid-row: 3 / 4;
-    }
-
     > .section-categorias {
       max-width: 60ch;
       grid-column: 2 / 3;
-      grid-row: 4 / 5;
+      grid-row: 3 / 4;
     }
   }
 

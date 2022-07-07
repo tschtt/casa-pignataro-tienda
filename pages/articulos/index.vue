@@ -52,6 +52,7 @@ export default {
       const result = {}
       const { search, orderBy, order, minValue, maxValue, fkSection, fkCategory, fkAttributeValue } = $route.value.query
 
+      result.active = true
       result.limit = state.limit
       result.offset = state.offset
       
@@ -89,7 +90,6 @@ export default {
     // actions
 
     async function loadMore() {
-      console.log('More!!')
       const result = await $articles.findMany(query.value)
       state.articles.push(...result)
       state.offset += state.limit
