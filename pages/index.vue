@@ -31,28 +31,13 @@ import { useResource } from '~/composables/index.js'
 
 export default {
   setup() {
-    const $sections = useResource('/sections')
-    const $articles = useResource('/articles')
+    const $sections = useResource('/v2/sections')
 
     const loading = ref(true)
     const sections = ref([])
 
-    const load_sections = async () => {
-      sections.value = await $sections.findMany()
-      
-      // categories.value = categories.value.sort((a, b) => {
-      //   if(a.name < b.name) { return -1 }
-      //   if(a.name > b.name) { return 1 }
-      //   return 0
-      // })
-
-      for await (const section of sections.value) {
-        section.articles = await $articles.findMany({ active: true, fkSection: section.id, limit: 4 })
-      }
-    }
-
     useFetch(async () => {
-      await load_sections()
+      sections.value = await $sections.findMany({ active: true })
       loading.value = false
     })
 

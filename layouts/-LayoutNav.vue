@@ -22,12 +22,12 @@ export default {
     },
   },
   setup() {
-    const $sections = useResource('/sections')
+    const $sections = useResource('/v2/sections')
 
     const sections = ref([])
 
     useFetch(async () => {
-      sections.value = await $sections.findMany({ onlyActive: true })
+      sections.value = await $sections.findMany()
       sections.value = sections.value.sort((a, b) => {
         if(a.name < b.name) { return -1 }
         if(a.name > b.name) { return 1 }
